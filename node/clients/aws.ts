@@ -7,7 +7,7 @@ import {
 interface emailGet { 
     email: string;
 }
-
+//Indica a url para a api aws criada e seu cabeçalho
 export default class AWSClient extends ExternalClient {
     private routes = { leads: ({email}: emailGet) => `/leads/${email}`, }
     constructor(ctx: IOContext, options?: InstanceOptions) {
@@ -19,16 +19,29 @@ export default class AWSClient extends ExternalClient {
             } 
         })
     }
-
+    //Busca a lead através do email na tabela do DynamoDB
     public leadList({email}: emailGet){
         return this.http.get(
             this.routes.leads({email}), {
                 metric: "leadss"
             }
         )
-    } //opcional
+    } 
+    //Insere uma lead na tabela do DynamoDB
+    public leadListPost({email}: emailGet){
+        return this.http.post(
+            this.routes.leads({email}), {
+                metric: "leadss"
+            }
+        )
+    }
+    public leadListUpdate({email}: emailGet){
+        return this.http.patch(
+            this.routes.leads({email}), {
+                metric: "leadss"
+            }
+        )
+    }
 }
 
 
-
-//super(`https://${ctx.account}.vtexcommercestable.com.br`, ctx, { ...options, retries: 3, headers: { VtexIdclientAutCookie: ctx.authToken, 'Proxy-Authorization': ctx.authToken, 'Content-Type': 'application/json', Accept: 'application/json', }, })
