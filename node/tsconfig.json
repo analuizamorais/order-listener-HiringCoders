@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node", "jest"],
+    "types": ["node"],
     "typeRoots": ["node_modules/@types"],
     "target": "es2017",
     "module": "commonjs",
@@ -25,3 +25,4 @@
   "include": ["global.ts", "./**/*"],
   "exclude": ["node_modules"]
 }
+
